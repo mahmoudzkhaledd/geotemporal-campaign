@@ -72,7 +72,6 @@ services:
       timeout: 5s
       retries: 5
 
-  # Runs once, initializes the replica set, then exits.
   mongo-init:
     image: mongo:latest
     depends_on:

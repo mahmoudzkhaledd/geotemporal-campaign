@@ -2,13 +2,26 @@ import type { Request, Response } from "express";
 import { CampaignModel } from "../../../../../db-schema/campaign.schema";
 import { addDays } from "date-fns";
 import { UserModel } from "../../../../../db-schema/user.schema";
+import { db } from "../../../../../lib/mongoose";
 
+function encodeCursor(cursor?: any) {
+  if (!cursor) return null;
+  return Buffer.from(JSON.stringify(cursor)).toString("base64");
+}
+
+function decodeCursor(cursor?: string) {
+  if (!cursor) return null;
+  return JSON.parse(Buffer.from(cursor, "base64").toString("utf8"));
+}
+
+const PAGE_SIZE = 1;
 export const getCampaignPerformanceService = async (
   req: Request<any, any, any>,
   res: Response,
   next: Function,
 ) => {
   const { campaignId } = req.params;
+  const { cursor } = req.query;
   const campaign = await CampaignModel.findById(campaignId);
   if (!campaign) throw new Error("Campaign not found");
   const dateBeforeCampaign = addDays(campaign.startDate, -30);
@@ -79,6 +92,7 @@ export const getCampaignPerformanceService = async (
               },
             },
           },
+
           {
             $project: {
               interval_name: {
@@ -102,6 +116,7 @@ export const getCampaignPerformanceService = async (
               total_revenue: 1,
               total_clicks: 1,
               total_views: 1,
+              // total_purchases: 1,
               conversion_rate: {
                 $cond: [
                   { $eq: ["$total_views", 0] },
@@ -130,7 +145,6 @@ export const getCampaignPerformanceService = async (
       },
     },
   ]);
-
   res.json({
     campaign,
     result,
