@@ -12,7 +12,7 @@ export const getCampaignPerformanceService = async (
   const campaign = await CampaignModel.findById(campaignId);
   if (!campaign) throw new Error("Campaign not found");
   const dateBeforeCampaign = addDays(campaign.startDate, -30);
-  const dateAfterCampaign = addDays(campaign.startDate, 30);
+  const dateAfterCampaign = addDays(campaign.endDate, 30);
 
   const result = await UserModel.aggregate([
     {
