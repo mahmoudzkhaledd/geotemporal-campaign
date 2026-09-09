@@ -1,0 +1,48 @@
+# Dependencies
+node_modules
+.pnpm-store
+.npm
+.yarn
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Build output
+dist
+build
+.next
+out
+
+# Logs
+*.log
+logs
+
+# Testing / coverage
+coverage
+.nyc_output
+
+# Development files
+.vscode
+.idea
+*.swp
+*.swo
+
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Docker
+Dockerfile*
+docker-compose*.yml
+docker-compose*.yaml
+.dockerignore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation
+README.md
