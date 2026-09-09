@@ -49,9 +49,9 @@ docker compose down -v
 
 ## Available scripts
 
-| Command | Description |
-| --- | --- |
-| `docker compose up -d --build` | Build and start the production services |
+| Command                                            | Description                                |
+| -------------------------------------------------- | ------------------------------------------ |
+| `docker compose up -d --build`                     | Build and start the production services    |
 | `docker compose run --rm server node dist/seed.js` | Clear and populate the production database |
-| `docker compose down` | Stop the production services |
-| `docker compose down -v` | Stop services and remove MongoDB volumes |
+| `docker compose down`                              | Stop the production services               |
+| `docker compose down -v`                           | Stop services and remove MongoDB volumes   |
