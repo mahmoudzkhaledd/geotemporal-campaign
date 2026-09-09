@@ -22,6 +22,8 @@ COPY package.json bun.lock ./
 
 COPY --from=builder /app/dist ./dist
 
+RUN npm install --omit=dev
+
 
 EXPOSE 3000
 

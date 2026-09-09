@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/app.ts",
-    "build": "bun build --target=node --outfile=dist/server.js ./src/app.ts",
+    "build": "bun build --target=node --external mongoose --outfile=dist/server.js ./src/app.ts && bun build --target=node --external mongoose --outfile=dist/seed.js ./scripts/seed-db.ts",
     "seed": "tsx scripts/seed-db.ts"
   },
   "devDependencies": {
